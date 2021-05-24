@@ -51,6 +51,10 @@ class DustyClient(discord.Client):
                         return
                 response = random.choice(food_quotes)
                 await message.channel.send(response)
+            elif parsed == "giveDustyThreeExtraLegs()":
+                await message.channel.send("Dusty writhes in pain...")
+                await message.channel.send("His two back legs have sprouted legs, and another leg flaps limply from his forehead like a sail in the wind.")
+                await message.channel.sned("The forehead leg flaps faster and faster until Dusty hovers above the ground. He proceeds to fly to Pyongyang to enjoy government-mandated blackouts.")
 
 
 client = DustyClient()
