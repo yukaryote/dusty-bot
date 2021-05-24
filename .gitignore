@@ -129,4 +129,6 @@ dmypy.json
 .pyre/
 
 # Custom
-.env
+*/.env
+*.env
+.env*
