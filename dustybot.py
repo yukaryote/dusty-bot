@@ -44,16 +44,13 @@ class DustyClient(discord.Client):
             elif parsed.startswith("feed(") and parsed.endswith(")"):
                 food = re.sub("[^\w]", " ",parsed[5:-1]).split()
                 print("food:", food)
-                if not food[0]:
-                    await message.channel.send("Dusty munches on the oxygen you offered.")
+                if not food:
+                    await message.channel.send("Dusty munches on whatever the fuck you offered.")
                     return
                 for f in food:
-                    if f not in good_food:
-                        response = "Dusty does not like {} and barfs on the piano.".format(f)
-                        await message.channel.send(response)
-                        return
-                response = random.choice(food_quotes)
-                await message.channel.send(response)
+                    response = random.choice(food_quotes + ["Dusty does not like {} and barfs on the piano.".format(f)])
+                    await message.channel.send(response)
+                    return
             elif parsed == "givedustythreeextralegs()":
                 await message.channel.send("Dusty writhes in pain...")
                 await message.channel.send("His two back legs have sprouted legs, and another leg flaps limply from his forehead like a sail in the wind.")
@@ -70,6 +67,11 @@ class DustyClient(discord.Client):
                 await message.channel.send(file=picture, embed=e)
                 '''
                 await message.channel.send(url)
+            elif parsed == "help()":
+                await message.channel.send("Usage: send messages like dusty.[function] to awaken Dusty.")
+                await message.channel.send("Functions are: feed([food]), pet(), deepfake(), givedustythreeextralegs()")
+            else:
+                await message.channel.send("Dusty does not understand your mortal speech.")
 
 client = DustyClient()
 client.run(TOKEN)
