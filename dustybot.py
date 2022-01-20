@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 import random
 import string
 import re
+import requests
+from io import BytesIO
+import datetime
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -51,11 +54,22 @@ class DustyClient(discord.Client):
                         return
                 response = random.choice(food_quotes)
                 await message.channel.send(response)
-            elif parsed == "giveDustyThreeExtraLegs()":
+            elif parsed == "givedustythreeextralegs()":
                 await message.channel.send("Dusty writhes in pain...")
                 await message.channel.send("His two back legs have sprouted legs, and another leg flaps limply from his forehead like a sail in the wind.")
-                await message.channel.sned("The forehead leg flaps faster and faster until Dusty hovers above the ground. He proceeds to fly to Pyongyang to enjoy government-mandated blackouts.")
-
+                await message.channel.send("The forehead leg flaps faster and faster until Dusty hovers above the ground. He proceeds to fly to Pyongyang to enjoy government-mandated blackouts.")
+            elif parsed == "deepfake()":
+                url = "https://thiscatdoesnotexist.com"
+                uncache = datetime.datetime.now().strftime("%m%d%Y%H%M%S")
+                url = url + "/?=" + uncache
+                '''
+                response = requests.get(url)
+                picture = discord.File(BytesIO(response.content))
+                e = discord.Embed()
+                e.set_image(url=url)
+                await message.channel.send(file=picture, embed=e)
+                '''
+                await message.channel.send(url)
 
 client = DustyClient()
 client.run(TOKEN)
